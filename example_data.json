@@ -1,0 +1,16 @@
+[
+	{
+		"from_pk": 0,
+		"to_pk": 1,
+		"t_start": "new Date(2016,0,01)",
+		"t_end": "new Date(2016,0,03)", 
+		"content":
+	},
+	{
+		"from_pk": 1,
+		"to_pk": 2,
+		"t_start": "new Date(2016,0,02)",
+		"t_end": "new Date(2016,0,02)", 
+		"content":
+	},
+]
