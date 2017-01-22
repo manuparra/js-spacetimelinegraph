@@ -28,34 +28,79 @@
 <p>
   
 </p>
-<div style="overflow-y: scroll;" id="visualization"></div>
+<div style="margin-top:-300px;overflow-y: scroll;transform: rotate(90deg);transform-origin: bottom left;" id="visualization"></div>
 
 <script>
 
-  var pks=2;
+  var pks=10;
 
   var data=[
   {
     "from_pk": 0,
     "to_pk": 1,
-    "t_start": new Date(2016,2,2),
-    "t_end": new Date(2016,2,3), 
+    "t_start": "2016-01-02 08:00",
+    "t_end": "2016-01-03 19:00",
+    "content": "Terraplen"
+  },
+   {
+    "from_pk": 1,
+    "to_pk": 2,
+    "t_start": "2016-01-02 08:00",
+    "t_end": "2016-01-03 19:00",
     "content": "Terraplen"
   },
   {
     "from_pk": 1,
     "to_pk": 2,
-    "t_start": new Date(2016,2,2),
-    "t_end": new Date(2016,2,4), 
+    "t_start": "2016-01-02",
+    "t_end": "2016-01-05",
     "content":"Terraplen"
   },
   {
     "from_pk": 0,
     "to_pk": 1,
-    "t_start": new Date(2016,2,1),
-    "t_end": new Date(2016,2,2), 
+    "t_start": "2016-01-04",
+    "t_end": "2016-01-06",
     "content":"Despeje"
   },
+    {
+    "from_pk": 1,
+    "to_pk": 2,
+    "t_start": "2016-01-03",
+    "t_end": "2016-01-06",
+    "content":"Despeje"
+  },
+   {
+    "from_pk": 1,
+    "to_pk": 4,
+    "t_start": "2016-01-04",
+    "t_end": "2016-01-05",
+    "content":"Despeje"
+  },
+   {
+    "from_pk": 2,
+    "to_pk": 3,
+    "t_start": "2016-01-04",
+    "t_end": "2016-01-05",
+    "content":"Despeje"
+  },
+  {
+    "from_pk": 8,
+    "to_pk": 9,
+    "t_start": "2016-01-04",
+    "t_end": "2016-01-05",
+    "content":"Despeje"
+  },
+   {
+    "from_pk": 6,
+    "to_pk": 8,
+    "t_start": "2016-01-04",
+    "t_end": "2016-01-05",
+    "content":"Despeje"
+  },
+
+
+
 ];
 
   var now = moment().minutes(0).seconds(0).milliseconds(0);
@@ -66,11 +111,13 @@
   var groups = new vis.DataSet();
 
   var group_index={};
+  rev_index=pks;
   for (var i=0; i<pks;  i++){    
-    var next=i+1;
-    groups.add({id: i, content: "" + i + "-" + next + " pk"});
+    var next=i+1;  
+    groups.add({id: next, content: "" + i + "-" + next + " pk"});
     group_index["ps"+i+"pe"+next]=i;
   }
+  
   
 
   // create a dataset with items
@@ -90,8 +137,10 @@
   // create visualization
   var container = document.getElementById('visualization');
   var options = {
-    groupOrder: 'content',  // groupOrder can be a property name or a sorting function
+    //groupOrder: 'id',  // groupOrder can be a property name or a sorting function
     align: "left",
+    height: "100%",
+    groupOrder: function (a,b) { if (a>b) return a;},
     orientation:
       {
         axis: "both"
