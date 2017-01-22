@@ -28,7 +28,7 @@
 <p>
   
 </p>
-<div style="margin-top:-300px;overflow-y: scroll;transform: rotate(90deg);transform-origin: bottom left;" id="visualization"></div>
+<div style="height:900px;margin-top:-900px;overflow-y: scroll;transform: rotate(90deg);transform-origin: bottom left;" id="visualization"></div>
 
 <script>
 
@@ -112,9 +112,9 @@
 
   var group_index={};
   rev_index=pks;
-  for (var i=0; i<pks;  i++){    
+  for (var i=0,r=pks; i<pks;  i++,r--){    
     var next=i+1;  
-    groups.add({id: next, content: "" + i + "-" + next + " pk"});
+    groups.add({id: i, id_vis:r , content: "" + i + "-" + next + " pk"});
     group_index["ps"+i+"pe"+next]=i;
   }
   
@@ -140,7 +140,7 @@
     //groupOrder: 'id',  // groupOrder can be a property name or a sorting function
     align: "left",
     height: "100%",
-    groupOrder: function (a,b) { if (a>b) return a;},
+    groupOrder: 'id_vis',
     orientation:
       {
         axis: "both"
